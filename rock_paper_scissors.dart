@@ -1,11 +1,13 @@
 import 'dart:io';
 
+
 const List<String> moves = ['rock', 'paper', 'scissors'];
 bool run = true;
 int round = 1;
 int scorePlayer1 = 0;
 int scorePlayer2 = 0;
 
+/// Gets the names of the two players from user input.
 List<String> getPlayerName() {
   stdout.write('Enter player 1 name: ');
   String? name = stdin.readLineSync();
@@ -26,9 +28,9 @@ List<String> getPlayerName() {
   return [name, name2];
 }
 
+/// Gets a valid move from the player, ensuring it is one of the allowed moves.
 String? getMove(String playerName) {
   String? move;
-
   while (true) {
     stdout.write('$playerName, enter your move (rock/paper/scissors): ');
     move = stdin.readLineSync();
@@ -39,10 +41,10 @@ String? getMove(String playerName) {
       break;
     }
   }
-
   return move.toLowerCase();
 }
 
+/// Decides the winner based on the moves of both players and updates the scores accordingly.
 String decideWinner(String move1, String move2) {
   if (move1 == move2) {
     return 'draw';
@@ -75,7 +77,7 @@ void main() {
   List<String> names = getPlayerName();
 
   while (run) {
-    print('\n--- Round $round ---');
+    print('--- Round $round ---');
 
     String? move1 = getMove(names[0]);
 
@@ -84,9 +86,7 @@ void main() {
     }
 
     String? move2 = getMove(names[1]);
-
     print('${names[0]} chose $move1. ${names[1]} chose $move2.');
-
     String result = decideWinner(move1!, move2!);
 
     if (result == 'draw') {
@@ -97,18 +97,21 @@ void main() {
       print('Result: ${names[1]} wins the round!');
     }
 
-    print(
-      'Score -> ${names[0]}: $scorePlayer1 | ${names[1]}: $scorePlayer2',
-    );
+    print('Score -> ${names[0]}: $scorePlayer1 | ${names[1]}: $scorePlayer2');
+    do {
+      stdout.write('Play again? (y/n): ');
+      String? answer = stdin.readLineSync();
 
-    stdout.write('Play again? (y/n): ');
-    String? answer = stdin.readLineSync();
-
-    if (answer == null || answer.toLowerCase() == 'n') {
-      run = false;
-    } else {
-      round++;
-    }
+      if (answer == null || answer.toLowerCase() != 'y' && answer.toLowerCase() != 'n') {
+        print('Invalid input. Please type y or n.');
+      } else if (answer.toLowerCase() == 'n') {
+        run = false;
+        break;
+      } else {
+        round++;
+        break;
+      }
+    } while (true);
   }
 
   print('\n===== FINAL SCORE =====');

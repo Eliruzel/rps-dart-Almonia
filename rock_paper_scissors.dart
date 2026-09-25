@@ -1,18 +1,5 @@
 import 'dart:io';
 
-/*
-1. Display a title banner when the program starts.
-2. Ask for Player 1's name, then Player 2's name.
-3. Ask Player 1 to enter a move: rock, paper, or scissors.
-4. After Player 1 enters a move, print about 30 blank lines using a loop. This hides Player
-1's move so Player 2 cannot see it.
-5. Ask Player 2 to enter a move.
-6. Show both moves, then announce the winner of the round or declare a draw.
-7. Show the current score of both players.
-8. Ask whether they want to play again (y/n). Keep playing rounds until they answer n.
-9. When the game ends, display the final score and the overall winner.
-*/
-
 const List<String> moves = ['rock', 'paper', 'scissors'];
 bool run = true;
 int round = 1;
